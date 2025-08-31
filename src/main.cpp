@@ -2,7 +2,7 @@
 #include "converter_json.h"
 #include "inverted_index.h"
 #include "search_server.h"
-//#include "config.h"
+
 
 std::vector<std::vector<std::pair<int, float>>>
 ConvertRelIndexToPair(const std::vector<std::vector<RelativeIndex>>& searchResult);
@@ -10,10 +10,6 @@ ConvertRelIndexToPair(const std::vector<std::vector<RelativeIndex>>& searchResul
 
 int main()
 {
-
-    // std::cout <<"/nVersion MAJOR.MINOR - " << SearchEngine_VERSION_MAJOR  << "."
-    //<< SearchEngine_VERSION_MINOR << std::endl;
-
     ConverterJSON convJSON;
     std::vector<std::string> texts;
     std::vector<std::string> requests;
@@ -22,7 +18,7 @@ int main()
         texts = convJSON.GetTextDocuments();
         requests = convJSON.GetRequests();       
     } catch (std::runtime_error err) {
-        std::cout<<err.what()<<"  Exit program!"<<std::endl;
+        std::cout<<err.what()<<"\nExit program!"<<std::endl;
         return 1;    
     }
     

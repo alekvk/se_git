@@ -13,7 +13,10 @@ void ConverterJSON::configInit()
         throw std::runtime_error ("Config file is missing!");
     }
 
-    
+    std::stringstream ss;
+    ss << SearchEngine_VERSION_MAJOR << "."
+       <<SearchEngine_VERSION_MINOR;
+    vers_cmake = ss.str();
 
     int count = 1;
 
@@ -27,7 +30,7 @@ void ConverterJSON::configInit()
             if (j.key() == "name") 
                 name_project = j.value();
             else if (j.key() == "version") 
-                version = j.value();
+                vers_conf_json = j.value();
             else if (j.key() == "max_responses") 
                 max_responses = j.value();
         }     
@@ -40,12 +43,10 @@ void ConverterJSON::configInit()
 
     if (checkConfig())
         std::cout<<"\nSTART!\nProject "<< name_project
-        <<" version " << SearchEngine_VERSION_MAJOR << "."
-        << SearchEngine_VERSION_MINOR << std::endl;
-
+        <<" version " << vers_cmake << std::endl;
 
     else
-        throw std::runtime_error("Configuration is not specified in the config.json file!  ");
+        throw std::runtime_error("Configuration is not specifieddd in the config.json file!  ");
 }
 
 std::vector<std::string> ConverterJSON::GetTextDocuments()
@@ -175,6 +176,16 @@ std::string ConverterJSON::getNameRequest(int n)
 
 bool ConverterJSON::checkConfig()
 {
-    return (!name_project.empty() && !version.empty()
+    return (!name_project.empty() && checkVersion()
             && max_responses > 0);
+}
+
+bool ConverterJSON::checkVersion()
+{
+    if(vers_cmake != vers_conf_json)
+        throw std::runtime_error ("Project version number error\nThe project version number in the config.json file "
+                                  + vers_conf_json +"\n"
+                                  + "The project version number in the CMakeLists.txt file " + vers_cmake);
+
+    return true;
 }

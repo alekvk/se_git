@@ -46,10 +46,13 @@ private:
     const std::string requests_path = json_path + "requests.json";
     const std::string answers_path = json_path + "answers.json.";
     std::string name_project;
-    std::string version; 
+    std::string vers_cmake;
+    std::string vers_conf_json;
     int max_responses = 0;
     std::vector<std::string> files;
     std::string readFile(const std::string& path);
     std::string getNameRequest(int n);
     bool checkConfig();
+    bool checkVersion();
+
 };
