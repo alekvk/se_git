@@ -39,7 +39,11 @@ void ConverterJSON::configInit()
     }
 
     if (checkConfig())
-        std::cout<<"\nSTART!\nProject name "<<name_project<<std::endl;
+        std::cout<<"\nSTART!\nProject "<< name_project
+        <<" version " << SearchEngine_VERSION_MAJOR << "."
+        << SearchEngine_VERSION_MINOR << std::endl;
+
+
     else
         throw std::runtime_error("Configuration is not specified in the config.json file!  ");
 }

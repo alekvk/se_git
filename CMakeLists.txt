@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project("Search engine" VERSION 1.0)
+project("SearchEngine" VERSION 32.79)
 
 set(CMAKE_CXX_STANDARD 14)
 
